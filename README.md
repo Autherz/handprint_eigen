@@ -1,5 +1,5 @@
 # handprint_eigen
-### build 
+### build image
 ```
 docker build -t my_docker_flask:latest .
 ```

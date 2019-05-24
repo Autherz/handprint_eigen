@@ -1,35 +1,113 @@
-<!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-        crossorigin="anonymous">
-</head>
-
+<title>Palmprint Recognition</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<style>
+body,h1 {font-family: "Raleway", sans-serif}
+body, html {height: 100%}
+.bgimg {
+  background-image: url('/w3images/forestbridge.jpg');
+  min-height: 100%;
+  background-position: center;
+  background-size: cover;
+}
+img{
+    width: 300 !important;
+    height: 300 !important;
+}
+</style>
 <body>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark" >
+                <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+                    <ul class="navbar-nav mr-auto">
+                        
+                    </ul>
+                </div>
+                <div class="mx-auto order-0">
+                    <a class="navbar-brand mx-auto"  href="#">ระบบรู้จำลายฝ่ามือ</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+                <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+                    <ul class="navbar-nav ml-auto">
+                        
+                    </ul>
+                </div>
+            </nav>
+        
+<br>
+<br>
+<br>
+<form id="upload-file" class="text-center form-position" method="post" enctype="multipart/form-data" action="">
+    <input name="file" type="file" id="filechooser" />
+    <button type="submit" id="upload-btn" class="btn btn-primary">upload</button>
+    <button type="button" id="upload-btn" class="btn btn-primary">clear</button>
+</form>
+<br>
+<br>
+<br>
+<div class="container" style="margin-bottom:30%">
+<div class="row" >
+        <div class="col-md-4" >
+            <h3>รูปภาพที่ต้องการทดสอบ</h3>
+            <img id="display" style="text-align:center; width: 400px; height: 200px;!important" />
+        </div>
+        <div class="col-md-4">
+            <h3>รูปภาพที่มีความตรงกัน</h3>
+            <div id="display2"></div>
+        </div>
+        <div class="col-md-4">
+            <h3>รายละเอียดในการทดสอบ</h3>
+            <div id="result"></div>
+            <div id="id"></div>
+            <div id="simi"></div>
+        </div>
+</div>  
+<div class="row">
 
-    <form id="upload-file" class="text-center form-position" method="post" enctype="multipart/form-data" action="">
-        <input name="file" type="file" id="filechooser" />
-        <button type="submit" id="upload-btn" class="btn btn-primary">upload</button>
-    </form>
-    
-    <div id="test"></div>
-    <div id="display" class="text-center"></div>
-    <div id="result"></div>
-    <div id="match"></div>
-    <div id="id"></div>
-    <div id="simi"></div>
-    <div id="display2" class="text-center"></div>
+</div>
+</div>
+<footer>
+    <!-- Copyright -->
+  <div class="footer-copyright text-center py-3" style="background-color:#343a40!important">© 2018 Copyright:
+        <a href="https://mdbootstrap.com/education/bootstrap/"> MDBootstrap.com</a>
+  </div>
+      <!-- Copyright -->
+</footer>
+<script type="text/javascript" src="../static/jquery/jquery-3.3.1.js"></script>
+<script>
+     console.log('test');
+    $('#display').hide();
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
 
+            reader.onload = function (e) {
+                $('#display')
+                    .attr('src', e.target.result)
+                    .width(150)
+                    .height(200);
+            };
 
-    <script type="text/javascript" src="../static/jquery/jquery-3.3.1.js"></script>
+            reader.readAsDataURL(input.files[0]);
+            $('#display').show();
+        }
+    }
+    // $('#upload-btn').click(function(){
+    //     console.log('test');
+    //     $('#display').hide();
+    //     $('#display1').hide();
+    //     $('#simi').innerHTML("")
+    //     $('#id').innerHTML("")
+    //     $('#display2').innerHTML("");                    
+    //     $('#result').innerHTML("");
+    // });
 
-    <script>
-        $('#upload-btn').click(function (e) {
+    $('#upload-btn').click(function (e) {
             e.preventDefault();
             var formData = new FormData($('#upload-file')[0]);
             var classes = ['background', 'Foi_Tong', 'grilled_sticky_rice', 'kanomkrok', 'kanom_tan', 'thai_mango_sticky_rice',
@@ -44,7 +122,7 @@
                 success: function (response) {
                     data = JSON.parse(response);
                     console.log(data);
-                    str = '<img src=' + data.img_path + ' width="960px" height="480px"/>';
+                    // str = '<img src=' + data.img_path + ' width="960px" height="480px"/>';
                     str2 = '<img src=' + data.img_path2 + ' width="960px" height="480px"/>';
                     console.log(data.data);
                     var boundingBox = data.data;
@@ -61,7 +139,7 @@
                     // html += '</ul></div>';
                     
                     $('#test').append('<h3>Test Image : </h3>');
-                    $('#display').append(str);
+                    // $('#display').innerHTML(str);
                     $('#result').append(html);
                     $('#match').append('<h3>Matching Image : </h3>')
                     $('#simi').append(simi)
@@ -79,5 +157,4 @@
 
     </script>
 </body>
-
 </html>

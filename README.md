@@ -1,4 +1,8 @@
 # handprint_eigen
+### local run (python)
+```
+python app.py
+```
 ### build image
 ```
 docker build -t my_docker_flask:latest .
